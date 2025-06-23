@@ -1,6 +1,7 @@
 package com.tftforge.service;
 
 import com.tftforge.data.MatchQueryParams;
+import com.tftforge.data.Player;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,7 @@ public class TftApiClient {
 
   @Value("${riot.api.key}")
   private String apiKey;
+
   private final RestTemplate restTemplate = new RestTemplate();
 
   public List<String> getMatchIds(MatchQueryParams params) {
@@ -40,6 +42,30 @@ public class TftApiClient {
         entity,
         new ParameterizedTypeReference<List<String>>() {
         });
+
+    return response.getBody();
+  }
+
+  public List<String> getPuuid(Player player) {
+    UriComponentsBuilder builder = UriComponentsBuilder.newInstance()
+        .scheme("https")
+        .host("asia.api.riotgames.com")
+        .path("/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}")
+        .encode();
+
+    String url = builder.buildAndExpand(player.getGameName(), player.getTagLine()).toUriString();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("X-Riot-Token", apiKey);
+    HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+    ResponseEntity<List<String>> response = restTemplate.exchange(
+        url,
+        HttpMethod.GET,
+        entity,
+        new ParameterizedTypeReference<List<String>>() {
+        }
+    );
 
     return response.getBody();
   }

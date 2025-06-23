@@ -2,6 +2,7 @@ package com.tftforge.service;
 
 import com.tftforge.TftforgeApplication;
 import com.tftforge.data.MatchQueryParams;
+import com.tftforge.data.Player;
 import com.tftforge.repository.TftForgeRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,10 @@ public class TftForgeService {
 
   public List<String> getMatch(MatchQueryParams params) {
     return application.getMatchIds(params);
+  }
+
+  public List<String> getPuuid(Player player) {
+    return application.getPuuid(player);
+
   }
 }
