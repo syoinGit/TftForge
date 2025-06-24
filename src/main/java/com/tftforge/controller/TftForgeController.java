@@ -23,7 +23,7 @@ public class TftForgeController {
   }
 
   @GetMapping("/getPuuid")
-  public List<String> getPuuid(@RequestParam String gameName, @RequestParam String tagLine) {
+  public Player getPuuid(@RequestParam String gameName, @RequestParam String tagLine) {
     Player player = new Player();
     player.setGameName(gameName);
     player.setTagLine(tagLine);

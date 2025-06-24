@@ -7,8 +7,7 @@ import lombok.Setter;
 @Setter
 public class Player {
 
+  private String puuid;
   private String gameName;
   private String tagLine;
-  private String puuid;
-  private String summonerId;
 }

@@ -46,7 +46,7 @@ public class TftApiClient {
     return response.getBody();
   }
 
-  public List<String> getPuuid(Player player) {
+  public Player getPuuid(Player player) {
     UriComponentsBuilder builder = UriComponentsBuilder.newInstance()
         .scheme("https")
         .host("asia.api.riotgames.com")
@@ -59,12 +59,11 @@ public class TftApiClient {
     headers.set("X-Riot-Token", apiKey);
     HttpEntity<Void> entity = new HttpEntity<>(headers);
 
-    ResponseEntity<List<String>> response = restTemplate.exchange(
+    ResponseEntity<Player> response = restTemplate.exchange(
         url,
         HttpMethod.GET,
         entity,
-        new ParameterizedTypeReference<List<String>>() {
-        }
+        Player.class
     );
 
     return response.getBody();

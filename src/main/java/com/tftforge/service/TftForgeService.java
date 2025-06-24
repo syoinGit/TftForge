@@ -22,7 +22,7 @@ public class TftForgeService {
     return application.getMatchIds(params);
   }
 
-  public List<String> getPuuid(Player player) {
+  public Player getPuuid(Player player) {
     return application.getPuuid(player);
 
   }
