@@ -1,5 +1,6 @@
 package com.tftforge.controller;
 
+import com.tftforge.data.Match.MatchDto;
 import com.tftforge.data.MatchQueryParams;
 import com.tftforge.data.Player;
 import com.tftforge.service.TftForgeService;
@@ -30,4 +31,9 @@ public class TftForgeController {
     return service.getPuuid(player);
   }
 
+  @GetMapping("/getMatchResult")
+  public MatchDto getMatchResult(@RequestParam String matchId) {
+    MatchDto matchDto = service.getMatchData(matchId);
+    return matchDto;
+  }
 }

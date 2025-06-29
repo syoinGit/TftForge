@@ -1,5 +1,6 @@
 package com.tftforge.service;
 
+import com.tftforge.data.Match.MatchDto;
 import com.tftforge.data.MatchQueryParams;
 import com.tftforge.data.Player;
 import org.springframework.core.ParameterizedTypeReference;
@@ -66,6 +67,28 @@ public class TftApiClient {
         Player.class
     );
 
+    return response.getBody();
+  }
+
+  public MatchDto getMatchDate(String matchId) {
+    UriComponentsBuilder builder = UriComponentsBuilder.newInstance()
+        .scheme("https")
+        .host("asia.api.riotgames.com")
+        .path("/tft/match/v1/matches/{matchId}")
+        .encode();
+
+    String url = builder.buildAndExpand(matchId).toUriString();
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("X-Riot-Token", apiKey);
+    HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+    ResponseEntity<MatchDto> response = restTemplate.exchange(
+        url,
+        HttpMethod.GET,
+        entity,
+        MatchDto.class
+    );
     return response.getBody();
   }
 }

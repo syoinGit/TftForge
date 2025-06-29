@@ -1,9 +1,8 @@
 package com.tftforge.service;
 
-import com.tftforge.TftforgeApplication;
+import com.tftforge.data.Match.MatchDto;
 import com.tftforge.data.MatchQueryParams;
 import com.tftforge.data.Player;
-import com.tftforge.repository.TftForgeRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,5 +24,9 @@ public class TftForgeService {
   public Player getPuuid(Player player) {
     return application.getPuuid(player);
 
+  }
+
+  public MatchDto getMatchData(String matchId) {
+    return application.getMatchDate(matchId);
   }
 }
